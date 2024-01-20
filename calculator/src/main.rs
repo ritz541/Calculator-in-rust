@@ -1,4 +1,4 @@
-use::std::io;
+use ::std::io;
 fn main() {
     let input = user_input();
     let x = input.0;
@@ -38,7 +38,7 @@ fn operation(x: i32, y: i32) {
         .read_line(&mut choice)
         .expect("Failed to read input!");
 
-    let choice: isize = choice.trim().parse().expect("Enter a valid option"); 
+    let choice: isize = choice.trim().parse().expect("Enter a valid option");
 
     if choice == 1 {
         println!("Addition of {} and {} is {}", x, y, x + y);
@@ -51,5 +51,4 @@ fn operation(x: i32, y: i32) {
     } else {
         println!("Invalid option: {}!", choice);
     }
-    
 }
