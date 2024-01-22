@@ -9,22 +9,13 @@ fn main() {
 
 fn user_input() -> (i32, i32) {
     println!("The first operand: ");
-    let mut input = String::new();
 
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Falied to read input!");
-
-    let first_number: i32 = input.trim().parse().expect("Enter a number!");
-
-    let mut input = String::new();
+    let first_number: i32 = input_number();
 
     println!("Enter second operand: ");
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Falied to read input!");
 
-    let second_number: i32 = input.trim().parse().expect("Enter a number!");
+    let second_number: i32 = input_number();
+    
     (first_number, second_number)
 }
 
@@ -51,4 +42,13 @@ fn operation(x: i32, y: i32) {
     } else {
         println!("Invalid option: {}!", choice);
     }
+}
+fn input_number() -> i32 {
+    let mut x = String::new();
+    io::stdin()
+        .read_line(&mut x)
+        .expect("Failed to read input!");
+
+    let x: i32 = x.trim().parse().expect("Enter a number!");
+    x
 }
