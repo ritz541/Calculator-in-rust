@@ -15,7 +15,7 @@ fn user_input() -> (i32, i32) {
     println!("Enter second operand: ");
 
     let second_number: i32 = input_number();
-    
+
     (first_number, second_number)
 }
 
