@@ -9,19 +9,28 @@ fn main() {
 
 fn user_input() -> (i32, i32) {
     println!("The first operand: ");
+    let mut input = String::new();
 
-    let first_number: i32 = input_number();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Falied to read input!");
+
+    let first_number: i32 = input.trim().parse().expect("Enter a number!");
+
+    let mut input = String::new();
 
     println!("Enter second operand: ");
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Falied to read input!");
 
-    let second_number: i32 = input_number();
-
+    let second_number: i32 = input.trim().parse().expect("Enter a number!");
     (first_number, second_number)
 }
 
 fn operation(x: i32, y: i32) {
     println!("1.Addition\n2.Subtraction\n3.Multiplication\n4.Division");
-    println!("Enter your choide(1/2/3/4");
+    println!("Enter your choice(1/2/3/4");
 
     let mut choice = String::new();
 
@@ -31,24 +40,39 @@ fn operation(x: i32, y: i32) {
 
     let choice: isize = choice.trim().parse().expect("Enter a valid option");
 
-    if choice == 1 {
-        println!("Addition of {} and {} is {}", x, y, x + y);
-    } else if choice == 2 {
-        println!("Subtraction of {} and {} is {}", x, y, x - y);
-    } else if choice == 3 {
-        println!("Multiplication of {} and {} is {}", x, y, x * y);
-    } else if choice == 4 {
-        println!("Division of {} and {} is {}", x, y, x / y);
-    } else {
-        println!("Invalid option: {}!", choice);
+    match choice {
+        1 => println!("Addition of {} and {} is {}", x, y, addition(x, y)),
+        2 => println!("Subtraction of {} and {} is {}", x, y, substraction(x, y)),
+        3 => println!(
+            "Multiplication of {} and {} is {}",
+            x,
+            y,
+            multiplication(x, y)
+        ),
+        4 => {
+            if y != 0 {
+                println!("Division of {} and {} is {}", x, y, division(x, y));
+            } else {
+                println!("Cannot divide by zero");
+            }
+        }
+        _ => println!("Invalid option: {}!", choice),
     }
 }
-fn input_number() -> i32 {
-    let mut x = String::new();
-    io::stdin()
-        .read_line(&mut x)
-        .expect("Failed to read input!");
 
-    let x: i32 = x.trim().parse().expect("Enter a number!");
-    x
+fn addition(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+fn substraction(x: i32, y: i32) -> i32 {
+    x - y
+}
+
+fn multiplication(x: i32, y: i32) -> i32 {
+    x * y
+}
+
+fn division(x: i32, y: i32) -> f32 {
+    let result = x as f32 / y as f32;
+    result
 }
